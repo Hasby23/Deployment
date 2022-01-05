@@ -6,9 +6,9 @@ import cv2
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = './static/uploads/'
-model = load_model('Hasil_Train_Female_Male.h5')
+model = load_model('Hasil_Train_Cats_Dogs.h5')
 
-class_dict = {0: 'Female', 1: 'Male'}
+class_dict = {0: 'Cats', 1: 'Dogs'}
 
 
 def predict_label(img_path):
