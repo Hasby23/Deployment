@@ -12,13 +12,19 @@ class_dict = {0: 'Female', 1: 'Male'}
 
 
 def predict_label(img_path):
-    query = cv2.imread(img_path)
-    query.copy()
-    query = cv2.resize(query, (32, 32))
-    q = [query]
-    q = np.array(q, dtype='float') / 255.0
-    q_pred = model.predict(q)
-    predicted_bit = int(q_pred)
+    # query = cv2.imread(img_path)
+    # query.copy()
+    # query = cv2.resize(query, (32, 32))
+    # q = [query]
+    # q = np.array(q, dtype='float') / 255.0
+    # q_pred = model.predict(q)
+    # predicted_bit = int(q_pred)
+    img = image.load_img(img_path, target_size=(89, 112))
+    X = image.img_to_array(img)
+    X = np.expand_dims(X, axis=0)
+    images = np.vstack([X])
+    val = model.predict(images)
+    predicted_bit = int(val)
     return class_dict[predicted_bit]
 
 
