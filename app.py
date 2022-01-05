@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = './static/uploads/'
 model = load_model('Hasil_Train_Cats_Dogs.h5')
 
-class_dict = {0: 'Cats', 1: 'Dogs'}
+# class_dict = {0: 'Cats', 1: 'Dogs'}
 
 
 def predict_label(img_path):
@@ -18,6 +18,10 @@ def predict_label(img_path):
     q = [query]
     q = np.array(q, dtype='float') / 255.0
     q_pred = model.predict(q)
+    if int(q_pred) <= 0.5:
+        q_pred = 0
+    else:
+        q_pred = 1
     predicted_bit = int(q_pred)
     return class_dict[predicted_bit]
 
